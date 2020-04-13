@@ -7,3 +7,11 @@ class LRU :
         self._freq_count_ = {}
 
 
+    def put(self, uri, data) :
+        pass
+
+    def get(self, uri) :
+        pass
+
+    def get_cache(self) :
+        pass
