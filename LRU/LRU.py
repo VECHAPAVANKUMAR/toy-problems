@@ -8,10 +8,33 @@ class LRU :
 
 
     def put(self, uri, data) :
-        pass
+        
+        if uri not in self._cache_.keys() :
+
+            if len (self._cache_) == self._cache_capacity_ :
+
+                x = sorted(self._freq_count_.items(), key = lambda item : item[1])[0]
+
+                key = x[0][:]
+
+                del self._cache_[key]
+                del self._freq_count_[key]
+
+            self._cache_[uri] = data
+            self._freq_count_[uri] = 0
 
     def get(self, uri) :
-        pass
+
+        try :
+
+            self._freq_count_[uri] += 1
+        
+            return self._cache_[uri]
+
+        except :
+
+            return None
 
     def get_cache(self) :
-        pass
+        
+        return self._cache_
