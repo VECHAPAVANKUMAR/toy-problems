@@ -76,26 +76,27 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", () => {
 
-            document.querySelector('#form').onsubmit = function () {
+            document.querySelector('#form').onsubmit = () => {
 
+                let flag = true;
 
                 const name = document.querySelector("#name").value;
 
                 if (name.length == 0) {
 
                     document.querySelector("#name-error").style.color = "red";
-                    document.querySelector("#name-error").padding = "0 0 0 8px";
+                    document.querySelector("#name-error").style.padding = "0 0 0 8px";
                     document.querySelector("#name-error").innerHTML = "user name should not be empty";
-                    return false
+                    flage = false
 
                 } else if  (name.length > 50) {
 
                     document.querySelector("#name-error").style.color = "red";
                     document.querySelector("#name-error").padding = "0 0 0 8px";
                     document.querySelector("#name-error").innerHTML = "user name should not contain more than 50 characters";
-                    return false
+                    flag = false
 
                 }
 
@@ -106,14 +107,14 @@
                     document.querySelector("#email-error").style.color = "red";
                     document.querySelector("#email-error").style.padding = "0 0 0 8px";
                     document.querySelector("#email-error").innerHTML = "email id is required";
-                    return false
+                    flag = false
 
                 } else if (email.length > 50) {
 
                     document.querySelector("#email-error").style.color = "red";
                     document.querySelector("#email-error").style.padding = "0 0 0 8px";
                     document.querySelector("#email-error").innerHTML = "email id should not contain more than 50 characters";
-                    return false
+                    flag = false
 
                 }
 
@@ -121,20 +122,19 @@
 
                 let regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,15})");
 
-
                 if (password.length == 0) {
 
                     document.querySelector("#pwd-error").style.color = "red";
                     document.querySelector("#pwd-error").style.padding = "0 0 0 8px";
                     document.querySelector("#pwd-error").innerHTML = "Password should not be empty";
-                    return false
+                    flag = false
 
                 } else if (!regex.test(password)) {
 
                     document.querySelector("#pwd-error").style.color = "red";
                     document.querySelector("#pwd-error").style.padding = "0 0 0 8px";
-                    document.querySelector("#pwd-error").innerHTML = "Password length should be in between 8 and 16 and it should include atleast one lowercase letter, one upper case letter, one digit and a special character"
-                    return false
+                    document.querySelector("#pwd-error").innerHTML = "Password length should be in between 8 and 16 and it should include atleast one lowercase letter, one upper case letter, one digit and a special character";
+                    flag = false
 
                 }
 
@@ -145,14 +145,14 @@
                     document.querySelector("#cpwd-error").style.color = "red";
                     document.querySelector("#cpwd-error").style.padding = "0 0 0 8px";
                     document.querySelector("#cpwd-error").innerHTML = "Password should not be empty";
-                    return false
+                    flag = false
 
                 } else if (!regex.test(conformPassword)) {
 
                     document.querySelector("#cpwd-error").style.color = "red";
                     document.querySelector("#cpwd-error").style.padding = "0 0 0 8px";
-                    document.querySelector("#cpwd-error").innerHTML = "Password length should be in between 8 and 16 and it should include atleast one lowercase letter, one upper case letter, one digit and a special character"
-                    return false
+                    document.querySelector("#cpwd-error").innerHTML = "Password length should be in between 8 and 16 and it should include atleast one lowercase letter, one upper case letter, one digit and a special character";
+                    flag = false
 
                 }
 
@@ -160,8 +160,8 @@
 
                     document.querySelector("#cpwd-error").style.color = "red";
                     document.querySelector("#cpwd-error").style.padding = "0 0 0 8px"
-                    document.querySelector("#cpwd-error").innerHTML = "Password and Conformation Password should match"
-                    return false
+                    document.querySelector("#cpwd-error").innerHTML = "Password and Conformation Password should match";
+                    flag = false
 
                 }
 
@@ -172,47 +172,60 @@
                     document.querySelector("#dob-error").style.color = "red";
                     document.querySelector("#dob-error").style.padding = "0 0 0 8px";
                     document.querySelector("#dob-error").innerHTML = "Date of Birth should not leave empty";
-                    return false
+                    flag = false
 
                 }
 
-                const male = document.querySelector("#male").checked
-                const female = document.querySelector("#female").checked
-                const other = document.querySelector("#other").checked
+                let count = 0;
 
-                if (male == false && female == false && other == false) {
+                document.querySelectorAll('.gen').forEach((radio) => {
+
+                    if (!radio.checked) {
+                        count++;
+                    };
+
+                });
+
+                if (count == 3) {
 
                     document.querySelector("#gen-error").style.color = "red";
                     document.querySelector("#gen-error").style.padding = "0 0 0 8px";
                     document.querySelector("#gen-error").innerHTML = "Please choose any of the above three options";
-                    return false
+                    flag = false
 
                 }
 
-                return true;
+                return flag;
 
             }
 
-            document.querySelector("#name").onkeyup = function () {
-                document.querySelector("#name-error").innerHTML = ""
+            document.querySelector("#name").onkeyup = () => {
+                document.querySelector("#name-error").innerHTML = "";
             }
 
-            document.querySelector("#email").onkeyup = function () {
-                document.querySelector("#email-error").innerHTML = ""
+            document.querySelector("#email").onkeyup = () => {
+                document.querySelector("#email-error").innerHTML = "";
             }
 
-            document.querySelector("#pwd").onkeyup = function () {
-                document.querySelector("#pwd-error").innerHTML = ""
+            document.querySelector("#pwd").onkeyup = () => {
+                document.querySelector("#pwd-error").innerHTML = "";
             }
 
-            document.querySelector("#cpwd").onkeyup = function () {
-                document.querySelector("#cpwd-error").innerHTML = ""
+            document.querySelector("#cpwd").onkeyup = () => {
+                document.querySelector("#cpwd-error").innerHTML = "";
             }
 
-            document.querySelector("#dateOfBirth").onkeyup = function () {
-                document.querySelector("#dob-error").innerHTML = ""
+            document.querySelector("#dateOfBirth").onkeyup = () => {
+                document.querySelector("#dob-error").innerHTML = "";
             }
 
+            document.querySelectorAll('.gen').forEach((radio) => {
+                radio.onchange = function() {
+                    if (radio.checked) {
+                        document.querySelector("#gen-error").innerHTML = "";
+                    }
+                };
+            });
         });
 
     </script>
