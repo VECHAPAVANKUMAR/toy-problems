@@ -1,3 +1,26 @@
+class Instructions extends React.Component {
+
+    render() {
+
+        return (
+
+            <div>
+                <p>Instruction 1 Instruction 1 Instruction 1 Instruction 1</p>
+                <p>Instruction 2 Instruction 2 Instruction 2 Instruction 2</p>
+                <p>Instruction 3 Instruction 3 Instruction 3 Instruction 3</p>
+                <p>Instruction 4 Instruction 4 Instruction 4 Instruction 4</p>
+                <p>Instruction 5 Instruction 5 Instruction 5 Instruction 5</p>
+                <p>Instruction 6 Instruction 6 Instruction 6 Instruction 6</p>
+                <p>Instruction 7 Instruction 7 Instruction 7 Instruction 7</p>
+                <p>Instruction 8 Instruction 8 Instruction 8 Instruction 8</p>
+                <p>Instruction 9 Instruction 9 Instruction 9 Instruction 9</p>
+                <p>Instruction 10 Instruction 10 Instruction 10 Instruction 10</p>
+            </div>
+
+        )
+    }
+}
+
 class Question extends React.Component {
 
     render() {
@@ -9,45 +32,41 @@ class Question extends React.Component {
                 <h3>{this.props.question}</h3>
 
                 {this.props.options.map((option, i) =>
-
+                    
                     <div key={i}>
-                        <input type="radio" name="options" value={option} onClick={this.props.handleChange}/>{option}
+                        <input type="radio" name="options" checked={this.props.choosedOptionIdx == i}
+                        onChange={this.props.handleChange} data-index = {i}/>{option}
                     </div>  
-
                 )}
-
-                <br/>
-
-                <button className="prev" onClick={this.props.previous} disabled={this.props.prevDisable}>Previous</button>
-                <button className="next" onClick={this.props.next} disabled={this.props.nextDisable}>Next</button>
-
-                <br/>
-                <button onClick={this.props.submit}>Finish</button>
-
             </div>
         )
     }
 }
 
 
+let timer = ""
+
 class Quiz extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+
             data : [
-                        {question: "First Question", options: ["A", "B", "C", "D"], answer: "C"},
-                        {question: "Second Question", options: ["B", "C", "D", "A"], answer: "B"},
-                        {question: "Third Question", options: ["A", "B", "C", "D"], answer: "A"}
+                        {question: "First Question", options: ["A", "B", "C", "D"], correctOptionIdx: 2, choosedOptionIdx : -1},
+                        {question: "Second Question", options: ["B", "C", "D", "A"], correctOptionIdx: 0, choosedOptionIdx : -1},
+                        {question: "Third Question", options: ["A", "B", "C", "D"], correctOptionIdx: 0, choosedOptionIdx : -1}
                    ],
 
             questionNumber : 0,
-            answers : [],
             prevDisable : false,
             nextDisable : false,
-            submit : false
+            start : false,
+            end : false,
+            endTime : "00:30:00"
         }
 
-        this.submit = this.submit.bind(this);
+        this.startQuiz = this.startQuiz.bind(this)
+        this.endQuiz = this.endQuiz.bind(this);
         this.previous = this.previous.bind(this);
         this.next = this.next.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -55,53 +74,96 @@ class Quiz extends React.Component {
 
     componentDidMount() {
 
-        this.state.data.forEach( e => {
-            this.state.answers.push("")
-        });
-
         this.previous()
     }
 
     render() {
 
-        if (!this.state.submit) {
+        if (!this.state.start) {
+            
+            return (
 
+                <div>
+                    <Instructions/>
+                    <button onClick={this.startQuiz}>Start Quiz</button>
+                </div>
+
+            )
+
+        } else if (!this.state.end && this.state.endTime !== "00:00:00") {
+            
             return (
                 
-                <Question question={this.state.data[this.state.questionNumber].question} 
-                          options={this.state.data[this.state.questionNumber].options} 
-                          answer={this.state.data[this.state.questionNumber].answer} 
-                          handleChange={this.handleChange} submit={this.submit}
-                          previous={this.previous} next={this.next} 
-                          prevDisable={this.state.prevDisable} nextDisable={this.state.nextDisable}/>
+                <div>
+
+                    <h2 className="timer">{this.state.endTime}</h2>
+
+                    <Question question={this.state.data[this.state.questionNumber].question} 
+                            options={this.state.data[this.state.questionNumber].options} 
+                            choosedOptionIdx = {this.state.data[this.state.questionNumber].choosedOptionIdx}
+                            handleChange={this.handleChange}/>
+                    
+                    <br/><button className="prev" onClick={this.previous} disabled={this.state.prevDisable}>Previous</button>
+                    <button className="next" onClick={this.next} disabled={this.state.nextDisable}>Next</button><br/>
+                    <button onClick={this.endQuiz}>Finish</button>
+
+                </div>
+          
             )
         } else {
 
-            let correctAnswers = 0;
-            this.state.answers.map((option, i) => {
-                
-                if (option === this.state.data[i].answer) {
-                    correctAnswers++;
+            clearInterval(timer)
+
+            let score = 0;
+
+            for (let index = 0; index < this.state.data.length; index++) {
+
+                if (this.state.data[index].correctOptionIdx == this.state.data[index].choosedOptionIdx) {
+                    score++;
                 }
-    
-            });
-            
+            }
+
             return (
-                <h1>You have scored {correctAnswers} out of {this.state.answers.length}</h1>
+                <h1>You have scored {score} out of {this.state.data.length}</h1>
             )
         }
     }
 
     handleChange(event) {
 
-        this.state.answers[this.state.questionNumber] = event.target.value;
+        const choosedOption = event.target.dataset.index;
+        
+        if (choosedOption == this.state.data[this.state.questionNumber].choosedOptionIdx) {
+            return
+        }
+        
+        this.state.data[this.state.questionNumber].choosedOptionIdx = choosedOption
+
+        this.setState({
+            questionNumber : this.state.questionNumber
+        })
     }
 
-    submit() { 
-               
-        this.setState({
-            submit : true,
+    endQuiz() { 
+             
+       this.setState({
+            end : true,
         });
+    }
+
+    startQuiz() {
+        
+        let end = new Date(0, 0, 0, 0, 30, 0, 0, 0)
+        
+        timer = setInterval(() => {
+            this.setState({
+                endTime : new Date(end.setTime(end.getTime() - 1000)).toString().slice(16, 24)
+            })
+        },1000)
+
+        this.setState({
+            start : true
+        })
     }
 
     previous() {
@@ -125,7 +187,6 @@ class Quiz extends React.Component {
     }
 
     next() {
-
 
         if (this.state.questionNumber < this.state.data.length - 2) {
             this.setState((state) => ({
