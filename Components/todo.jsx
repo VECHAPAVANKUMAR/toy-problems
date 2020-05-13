@@ -24,9 +24,9 @@ class Task extends Component {
                 }
 
                 <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={this.state.marked ? "#f5dd4b" : "#f4f3f4"}
+                        thumbColor={this.props.task.marked ? "#f5dd4b" : "#f4f3f4"}
                         onValueChange={(event) => this.toggleSwitch(event, this.props.taskID)}
-                        value={this.state.marked}
+                        value={this.props.task.marked}
                         style={{margin : 10}}/>
 
                 <Button title="Delete" style={{alignItems: 'right',}}
