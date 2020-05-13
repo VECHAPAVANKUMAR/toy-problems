@@ -1,26 +1,3 @@
-class Instructions extends React.Component {
-
-    render() {
-
-        return (
-
-            <div>
-                <p>Instruction 1 Instruction 1 Instruction 1 Instruction 1</p>
-                <p>Instruction 2 Instruction 2 Instruction 2 Instruction 2</p>
-                <p>Instruction 3 Instruction 3 Instruction 3 Instruction 3</p>
-                <p>Instruction 4 Instruction 4 Instruction 4 Instruction 4</p>
-                <p>Instruction 5 Instruction 5 Instruction 5 Instruction 5</p>
-                <p>Instruction 6 Instruction 6 Instruction 6 Instruction 6</p>
-                <p>Instruction 7 Instruction 7 Instruction 7 Instruction 7</p>
-                <p>Instruction 8 Instruction 8 Instruction 8 Instruction 8</p>
-                <p>Instruction 9 Instruction 9 Instruction 9 Instruction 9</p>
-                <p>Instruction 10 Instruction 10 Instruction 10 Instruction 10</p>
-            </div>
-
-        )
-    }
-}
-
 class Question extends React.Component {
 
     render() {
@@ -204,6 +181,29 @@ class Quiz extends React.Component {
                 nextDisable : true
             })
         }
+    }
+}
+
+class Instructions extends React.Component {
+
+    render() {
+
+        return (
+
+            <div>
+                <p>Instruction 1 Instruction 1 Instruction 1 Instruction 1</p>
+                <p>Instruction 2 Instruction 2 Instruction 2 Instruction 2</p>
+                <p>Instruction 3 Instruction 3 Instruction 3 Instruction 3</p>
+                <p>Instruction 4 Instruction 4 Instruction 4 Instruction 4</p>
+                <p>Instruction 5 Instruction 5 Instruction 5 Instruction 5</p>
+                <p>Instruction 6 Instruction 6 Instruction 6 Instruction 6</p>
+                <p>Instruction 7 Instruction 7 Instruction 7 Instruction 7</p>
+                <p>Instruction 8 Instruction 8 Instruction 8 Instruction 8</p>
+                <p>Instruction 9 Instruction 9 Instruction 9 Instruction 9</p>
+                <p>Instruction 10 Instruction 10 Instruction 10 Instruction 10</p>
+            </div>
+
+        )
     }
 }
 
