@@ -16,19 +16,19 @@ class App extends Component {
 
     return (
 
-      <View style={styles.container}>
+      <View>
 
         <ScrollView>
-        {this.state.todoList.map((task, index) => {
+          {this.state.todoList.map((task, index) => {
 
-          return (
+            return (
 
-            <Task key={index} taskID={index} task={task} 
-            markTask={this.markTask} deleteTask={this.deleteTask} />
+              <Task key={index} taskID={index} task={task} 
+              markTask={this.markTask} deleteTask={this.deleteTask} />
 
-          )
+            )
 
-        })}
+          })}
         </ScrollView>
           <Form addTask={this.addTask}/>
       </View>
