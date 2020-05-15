@@ -23,7 +23,7 @@ class Task extends Component {
                     <Text style={styles.text}> {this.props.task.task} </Text>
                 }
                 
-                <Text style={{marginTop : 10, marginRight : 5}}>{this.props.task.dueDate.toDateString()}</Text>
+                <Text style={{marginTop : 10, marginRight : 5}}>{this.props.task.dueDate.toString().slice(0,10)}</Text>
 
                 <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
                         thumbColor={this.props.task.marked ? "#00bfff" : "#f4f3f4"}
