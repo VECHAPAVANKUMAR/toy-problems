@@ -26,7 +26,7 @@ class Task extends Component {
                 <Text style={{marginTop : 10, marginRight : 5}}>{this.props.task.dueDate.toDateString()}</Text>
 
                 <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={this.props.task.marked ? "#f5dd4b" : "#f4f3f4"}
+                        thumbColor={this.props.task.marked ? "#00bfff" : "#f4f3f4"}
                         onValueChange={(event) => this.toggleSwitch(event, this.props.taskID)}
                         value={this.props.task.marked}
                         style={{margin : 10}}/>
