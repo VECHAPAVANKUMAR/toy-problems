@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Button } from 'react-native';
-import DatePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-datepicker';
 
 class Form extends Component {
     
@@ -21,12 +21,13 @@ class Form extends Component {
 
             <View style={{marginTop : 25,}}>
 
-                <View style={{flexDirection : "row", maxHeight : 40}}>
+                <View style={{maxHeight : 40,}}>
 
                     <TextInput style={styles.text} placeholder="enter your task" value={this.state.input} onChangeText = {this.handleTextChange}/>
-                    <DatePicker style={{width: 200}} date={this.state.date} mode="date" placeholder="select date"
+                    <DatePicker style={{width: 310, marginBottom : 15}} date={this.state.date} mode="date" placeholder="select date"
                                 format="DD-MM-YYYY" minDate={new Date()} confirmBtnText="Confirm" cancelBtnText="Cancel"
-                                customStyles={styles.date} onDateChange={(date) => {this.setState({date: date})}} />
+                                customStyles={{dateIcon: { position: 'relative', right: 0, top: 4, marginRight: 0 },
+                                dateInput: { marginLeft: 10 }}} onDateChange={(date) => {this.setState({date: date})}} />
                     <Button title="Add Todo" onPress={this.handleAddTask}/>
 
                 </View>
@@ -44,14 +45,21 @@ class Form extends Component {
 
     handleAddTask = () => {
         
-        if (this.state.input.trim().length === 0) {
+        if (this.state.input.trim().length === 0 || this.state.date.toString().trim().length === 0) {
             return
         }
-
-        this.props.addTask(this.state.input, this.state.date)
         
+        let a = new Date()
+        a.setDate(this.state.date.toString().slice(0,2))
+        a = new Date(a)
+
+        if (a === NaN || a.toString() === "Invalid Date") {
+          this.props.addTask(this.state.input, this.state.date.toString().slice(0,10))} else {
+          this.props.addTask(this.state.input, a)
+          }        
         this.setState({
-            input : ""
+            input : "",
+            date : ""
         })
     }
 }
@@ -68,12 +76,8 @@ const styles = StyleSheet.create({
         width : 300,
         padding : 10,
         marginLeft : 10,
-        marginRight : 10
+        marginRight : 10,
+        margin : 15
     },
-
-    date: {
-        dateIcon: { position: 'absolute', left: 0, top: 4, marginLeft: 0 },
-        dateInput: { marginLeft: 36 }  
-    }
   });
   

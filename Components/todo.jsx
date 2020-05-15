@@ -31,7 +31,7 @@ class Task extends Component {
                         value={this.props.task.marked}
                         style={{margin : 10}}/>
 
-                <Button title="Delete" style={{alignItems: 'right',}}
+                <Button title="Delete" style={{alignItems: 'right'}}
                         onPress={(event) => this.handleDeleteTask(event, this.props.taskID)}/>
 
             </View>
