@@ -18,6 +18,7 @@ class App extends Component {
 
       <View style={styles.container}>
 
+        <ScrollView>
         {this.state.todoList.map((task, index) => {
 
           return (
@@ -28,7 +29,7 @@ class App extends Component {
           )
 
         })}
-
+        </ScrollView>
           <Form addTask={this.addTask}/>
       </View>
     );

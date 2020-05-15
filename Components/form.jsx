@@ -21,7 +21,7 @@ class Form extends Component {
 
             <View style={{marginTop : 25,}}>
 
-                <View style={{maxHeight : 40,}}>
+                <View>
 
                     <TextInput style={styles.text} placeholder="enter your task" value={this.state.input} onChangeText = {this.handleTextChange}/>
                     <DatePicker style={{width: 310, marginBottom : 15}} date={this.state.date} mode="date" placeholder="select date"
