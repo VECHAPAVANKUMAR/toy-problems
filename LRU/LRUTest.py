@@ -21,7 +21,7 @@ def main() :
     assert(lru_object.get("file1.txt")) == None
     lru_object.put("2",3)
     assert(sorted(lru_object.get_cache())) == ['2', 'file2.txt', 'file3.txt', 'file4.txt', 'file5.txt']
-    lru_object.put("3",4)
+    lru_object.put("3",4) 
     assert(lru_object.get("1")) == None
     assert(lru_object.get("2")) == None
     assert(sorted(lru_object.get_cache())) == ['3', 'file2.txt', 'file3.txt', 'file4.txt', 'file5.txt']
