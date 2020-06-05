@@ -101,7 +101,35 @@ class Quiz extends React.Component {
             }
 
             return (
-                <h1>You have scored {score} out of {this.state.data.length}</h1>
+
+                <div>
+
+                    {this.state.data.map((ques, index) => {
+
+                        return (
+
+                            <div>
+
+                                <p> {index + 1}. {ques.question} </p>
+
+                                <p>
+                                    {ques.options.map((opt, idx) => {
+                                        return (<span> <b> {idx + 1} </b> : {opt} </span>)
+                                    })}
+                                </p>
+
+                                <p> Correct Option : {parseInt(ques.correctOptionIdx) + 1} </p>
+
+                                <p> Option Choosed : {ques.choosedOptionIdx == -1 ? "No": parseInt(ques.choosedOptionIdx) + 1} </p>
+
+                            </div>
+
+                        )
+                    })}
+
+                    <h1>You have scored {score} out of {this.state.data.length}</h1>
+
+                </div>
             )
         }
     }
@@ -120,6 +148,18 @@ class Quiz extends React.Component {
             questionNumber : this.state.questionNumber
         })
     }
+//     <div> 
+                            
+//     <p> {index} : {ques.question} </p>
+//     <b>Options</b>
+//     <p>
+//         {ques.options.forEach((opt, idx) => {
+//             <b> {idx} : {opt} </b>
+//         })}
+//     </p>
+//     <p> Correct Option : {ques.correctOptionIdx} </p>
+//     <p> Choosed Option : {ques.choosedOptionIdx} </p>
+// </div>
 
     endQuiz() { 
              
