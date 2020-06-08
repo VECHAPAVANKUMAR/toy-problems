@@ -28,5 +28,5 @@ def main() :
     print ("All Testcases Passed!")
                                                                           
 if __name__=="__main__":
-    main() 
-                       
+    main()
+    
