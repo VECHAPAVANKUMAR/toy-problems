@@ -1,7 +1,7 @@
 from LRU import *
 import os
 
-def main() 
+def main()
 
     lru_object = LRU(5)
 
