@@ -1,7 +1,8 @@
 from LRU import *
 import os
+import sys
 
-def main()
+def main() :
 
     lru_object = LRU(5)
 
@@ -26,7 +27,7 @@ def main()
     assert(lru_object.get("2")) == None
     assert(sorted(lru_object.get_cache())) == ['3', 'file2.txt', 'file3.txt', 'file4.txt', 'file5.txt']
     print ("All Testcases Passed!")
-                                                                          
+    print(os.path.dirname(sys.executable))                                                               
 
 if __name__=="__main__":
     main()              
