@@ -1,16 +1,6 @@
 def fun() :
     print('main')
-fun()     
-
-
-
-
-
-
-
-
-
-
+fun()
 
 
 
