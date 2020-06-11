@@ -1,7 +1,7 @@
 import unittest
 from operations import *
 
-class TestCases(unittest.TestCase) :
+class Testing(unittest.TestCase) :
     def add(self) :
         self.assertTrue(add(1,2), 3)
         self.asserTrue(add(2,3), 4)
