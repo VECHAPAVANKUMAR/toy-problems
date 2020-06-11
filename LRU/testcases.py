@@ -1,5 +1,5 @@
 import unittest
-import * from operations
+from operations import *
 
 class TestCases(unittest.TestCase) :
     self.assertTrue(add(1,2), 3)
