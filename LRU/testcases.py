@@ -2,8 +2,9 @@ import unittest
 from operations import *
 
 class TestCases(unittest.TestCase) :
-    assertTrue(add(1,2), 3)
-    assertFalse(add(2,3), 4)
+    def TestCaseOne(self) :
+        self.assertTrue(add(1,2), 3)
+        self.assertFalse(add(2,3), 4)
 
 if __name__=="__main__" :
     unittest.main()
