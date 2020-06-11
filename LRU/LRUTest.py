@@ -12,6 +12,7 @@ def main() :
             data = open(file, "r").read()
             lru_object.put(file, data)
      
+     print(lru_object.get_cache())
     # assert(lru_object.get("file1.txt")) == "This is First file."
     # assert(lru_object.get("file2.txt")) == "This is Second file."
     # assert(lru_object.get("file3.txt")) == "This is Third file."
