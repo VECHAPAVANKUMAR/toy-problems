@@ -2,7 +2,7 @@ import unittest
 from operations import *
 
 class TestCases(unittest.TestCase) :
-    def TestCaseOne(self) :
+    def add(self) :
         self.assertTrue(add(1,2), 3)
         self.asserTrue(add(2,3), 4)
 
