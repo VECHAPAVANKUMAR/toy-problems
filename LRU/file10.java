@@ -6,3 +6,4 @@ public class file10 {
         System.out.println("Main");
     } 
 } 
+
