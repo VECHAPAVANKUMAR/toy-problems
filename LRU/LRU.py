@@ -32,7 +32,7 @@ class LRU :
             return self._cache_[uri]
 
         except : 
-
+                                                
             return None
 
     def get_cache(self) : 

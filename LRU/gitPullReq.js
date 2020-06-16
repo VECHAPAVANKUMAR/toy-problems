@@ -15,3 +15,4 @@ fetch('https://api.github.com/repos/VECHAPAVANKUMAR/toy-problems/pulls', {
   })
 .then((res) => res.json())
 .then((json) => console.log(json));
+
