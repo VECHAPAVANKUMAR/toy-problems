@@ -9,11 +9,11 @@ def maxBlock(word):
     if len(word) == 0:
         return 0
     
-    max_count=0
-    count=1
+    max_count = 0
+    count = 1
     
     for i in range (0, len(word) - 1):
-        
+
         if word[i]==word[i+1]:
             count+=1
         else:
