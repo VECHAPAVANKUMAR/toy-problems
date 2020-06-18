@@ -7,10 +7,7 @@ def sub(a,b) :
 def maxBlock(word):
     max_count=0
     count=1
-    for i in range (len(word)):
-        if i==len(word)-1:
-            break
-
+    for i in range (0, len(word)):
         if word[i]==word[i+1]:
             count+=1
         else:
