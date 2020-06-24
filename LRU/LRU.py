@@ -37,6 +37,6 @@ class LRU :
 
     def get_cache(self) : 
         
-        return self._
+        return self._cache_
 
         
