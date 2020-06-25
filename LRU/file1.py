@@ -1,3 +1,4 @@
 def fun() :
     print('main')
-fun(
+def main() :
+    fun
